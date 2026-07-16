@@ -1,1 +1,7 @@
 .env
+*.gguf
+__pycache__/*
+.venv/*
+.vscode/*
+.env.example
+.env.example
