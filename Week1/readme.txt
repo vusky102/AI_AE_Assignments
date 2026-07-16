@@ -5,7 +5,6 @@ This directory contains two python projects for Week 1.
 Project Structure
 - Assignment 01 - Command-Line Task Manager.py: A command-line program to add, view, complete, and delete tasks.
 - Assignment 02 - Prompt-Driven Work Instructions.py: An AI assistant that generates manufacturing instructions for new car models using an LLM.
-- instructions_report.txt: Report showing the generated assembly instructions for the 5 mock tasks.
 - readme.txt: Short report detailing the approach and folder info.
 
 
@@ -26,9 +25,9 @@ python "Assignment 01 - Command-Line Task Manager.py"
 Assignment 02: Prompt-Driven Work Instructions Generator
 
 Approach
-- LLM Connection: Uses AzureChatOpenAI and prompt engineering to draft detailed, sequential assembly instructions.
-- Fallback Mechanism: If the Azure API keys are not detected in the environment variables, the script automatically uses high-quality pre-computed responses to guarantee execution.
-- File Output: Generated shop-floor instructions are saved to a file called instructions_report.txt.
+- LLM Connection: Uses OpenAI client and prompt engineering to draft detailed, sequential assembly instructions.
+- Environment variables: Loads OPENAI_API_KEY, OPENAI_API_BASEURL, and OPENAI_API_MODEL from the env file to make the api calls.
+- Output: Prints the generated shop-floor instructions directly to the console.
 
 Challenges Faced: None
 
