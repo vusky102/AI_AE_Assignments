@@ -43,13 +43,18 @@ def generate_instruction(task):
         base_url=openai_base
     )
     
-    prompt = f"""You are an expert automotive manufacturing supervisor. Generate step-by-step 
-work instructions for the following new model task. Include safety 
-precautions, required tools (if any), and acceptance checks. Write in clear, 
-numbered steps suitable for production workers.
+    # Prompt optimized to generate exactly 4-5 concise steps as shown in the user's instructions
+    prompt = f"""You are an expert automotive manufacturing supervisor. 
+Generate exactly 4 to 5 short, concise, single-sentence step-by-step work instructions for the new model task.
+Keep it simple and numbered as:
+1. [First instruction]
+2. [Second instruction]
+3. [Third instruction]
+4. [Fourth instruction]
+5. [Fifth instruction]
 
 Task:
-\"\"\"{task}\"\"\"
+\"{task}\"
 
 Work Instructions:"""
 
@@ -60,13 +65,45 @@ Work Instructions:"""
     )
     return response.choices[0].message.content.strip()
 
+def print_table(results):
+    # Print the table header
+    print("=" * 110)
+    print(f"{'Task Description'.ljust(45)} | {'Generated Work Instruction'}")
+    print("=" * 110)
+    
+    for task_desc, instruction_text in results:
+        # Wrap task description to line lengths of 42 characters
+        desc_lines = []
+        words = task_desc.split()
+        current_line = []
+        for word in words:
+            if len(" ".join(current_line + [word])) <= 42:
+                current_line.append(word)
+            else:
+                desc_lines.append(" ".join(current_line))
+                current_line = [word]
+        if current_line:
+            desc_lines.append(" ".join(current_line))
+            
+        # Split instructions by newline
+        instruction_lines = [line.strip() for line in instruction_text.split("\n") if line.strip()]
+        
+        # Print side-by-side
+        max_lines = max(len(desc_lines), len(instruction_lines))
+        for i in range(max_lines):
+            left = desc_lines[i] if i < len(desc_lines) else ""
+            right = instruction_lines[i] if i < len(instruction_lines) else ""
+            print(f"{left.ljust(45)} | {right}")
+        
+        print("-" * 110)
+
 def main():
-    for i, task in enumerate(task_descriptions, start=1):
+    results = []
+    for task in task_descriptions:
         instructions = generate_instruction(task)
-        print(f"Task Description #{i}: {task}")
-        print("Generated Work Instruction:")
-        print(instructions)
-        print("-" * 50)
+        results.append((task, instructions))
+        
+    print_table(results)
 
 if __name__ == "__main__":
     main()
