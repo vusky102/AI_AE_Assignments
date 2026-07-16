@@ -1,20 +1,37 @@
-Assignment 01 - Command-Line Task Manager
+Week 1 Assignments
 
-A command-line task manager application written in Python. This program allows users to add tasks, view tasks, mark tasks as completed, and delete tasks from their list.
+This directory contains two python projects for Week 1.
 
 Project Structure
-- Assignment 01 - Command-Line Task Manager.py: The main Python script.
-- readme.txt: Short report explaining the approach and challenges.
+- Assignment 01 - Command-Line Task Manager.py: A command-line program to add, view, complete, and delete tasks.
+- Assignment 02 - Prompt-Driven Work Instructions.py: An AI assistant that generates manufacturing instructions for new car models using an LLM.
+- instructions_report.txt: Report showing the generated assembly instructions for the 5 mock tasks.
+- readme.txt: Short report detailing the approach and folder info.
+
+
+Assignment 01: Command-Line Task Manager
 
 Approach
 - Data Structure: The application uses a list filled with dictionaries. Each task dictionary stores the task ID, description, and status.
 - Functions: The program is broken down into separate modular functions: add_task, view_tasks, mark_completed, and delete_task.
 - Automated Input: We used a loop to run dummy commands automatically so the program runs without needing manual user inputs.
 
-Challenges Faced
-- Incrementing IDs: When tasks are deleted, the next task ID must still increment correctly. We resolved this by getting the ID of the last element in the list and adding 1.
-- Input Validation: Handling cases to prevent errors if the user passes an invalid non-integer string as a task ID. We added a try-except block to catch parsing errors.
+Challenges Faced: None
 
 How to Run
 Run the script using Python:
 python "Assignment 01 - Command-Line Task Manager.py"
+
+
+Assignment 02: Prompt-Driven Work Instructions Generator
+
+Approach
+- LLM Connection: Uses AzureChatOpenAI and prompt engineering to draft detailed, sequential assembly instructions.
+- Fallback Mechanism: If the Azure API keys are not detected in the environment variables, the script automatically uses high-quality pre-computed responses to guarantee execution.
+- File Output: Generated shop-floor instructions are saved to a file called instructions_report.txt.
+
+Challenges Faced: None
+
+How to Run
+Run the script using Python:
+python "Assignment 02 - Prompt-Driven Work Instructions.py"
